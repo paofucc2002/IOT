@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>IOT PQP</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="assets/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+    <link href="assets/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
+    <link href="assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/master.css" rel="stylesheet">
+    <link href="assets/vendor/flagiconcss/css/flag-icon.min.css" rel="stylesheet">
+    <link href="phongcach.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <nav id="sidebar" class="active">
+            <div class="sidebar-header">
+                <img src="assets/img/PQP_logo.png" alt="bootraper logo" class="app-logo">
+            </div>
+            <ul class="list-unstyled components text-secondary">
+                <li>
+                    <a href="index.html"><i class="fas fa-microchip"></i> Bảng điều khiển</a>
+                </li>
+                <li>
+                    <a href="users.html"><i class="fas fa-user-friends"></i> Danh sách nhóm</a>
+                </li>
+            </ul>
+        </nav>
+        <div id="body" class="active">
+            <!-- navbar navigation component -->
+            <nav class="navbar navbar-expand-lg navbar-white bg-white">
+                <button type="button" id="sidebarCollapse" class="btn btn-light">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul style="margin: auto; color:#ff0000; font-size: large;" class="nav navbar-nav ms-auto"><b><u><a href="index.html">Trang chủ</a></u></b></ul>
+                </div>
+            </nav>
+            <!-- end of navbar navigation -->
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 page-header">
+                            <div class="page-pretitle">PQP Team ( IOT - 01CLC )</div>
+                            <h2 style="color: #ff4da6;" class="page-title"><marquee><b>BẢNG ĐIỀU KHIỂN TẦN SUẤT VÀ GIÁM SÁT TRẠNG THÁI</b></marquee></h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="content">
+                                            <div class="head">
+                                                <h5 id="nhapnhay1" class="mb-0">Bảng điều khiển tần suất</h5>
+                                                <p class="text-muted">Vui lòng chọn tần suất lấy mẫu.</p>
+                                            </div>
+                                            <form id="pqp_form" action="">
+                                                <input type="radio" id="" name="tansuat" value="1"> 1 giây<br>
+                                                <input type="radio" id="" name="tansuat" value="0"> 5 giây<br>
+                                                <input class="btn btn-primary" type="submit" value="Submit">
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="content">
+                                            <div class="head">
+                                                <h5 class="mb-0" style="color: blueviolet;">Tốc độ thay đổi khoảng cách</h5>
+                                            </div>
+                                            <div>
+                                                <p id ="daoham"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="content">
+                                            <div class="head">
+                                                <h5 class="mb-0" style="color: blueviolet;">Đèn cảnh báo tốc độ thay đổi về khoảng cách:</h5>
+                                            </div>
+                                            <div id = "canhbao" style="width: 100%px; height:90px; background-color: #00ff00;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="content">
+                                            <div class="head">
+                                                <h5 id="nhapnhay2" class="mb-0">Bảng hiển thị giá trị</h5>
+                                                <p class="text-muted">Khoảng cách(cm)</p>
+                                            </div>
+                                            <div class="canvas-wrapper">
+                                                <canvas class="chart" id="myChart"></canvas>
+                                            </div>
+                                            <p style="text-align: right;" class="text-muted">Thời gian(s)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="container">
+                            <div class="page-title">
+                                <h3>Bảng giá trị tức thời</h3>
+                            </div>
+                            <div class="box box-primary">
+                                <div class="box-body">
+                                    <table width="100%" class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Thời gian</th>
+                                                <th>Khoảng cách</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td id="thoigian1"></td> 
+                                                <td id="khoangcach1"></td>
+                                                <td class="text-end">
+                                                    <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
+                                                    <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="thoigian2"></td>
+                                                <td id="khoangcach2"></td>
+                                                <td class="text-end">
+                                                    <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
+                                                    <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="thoigian3"></td>
+                                                <td id="khoangcach3"></td>
+                                                <td class="text-end">
+                                                    <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
+                                                    <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="thoigian4"></td>
+                                                <td id="khoangcach4"></td>
+                                                <td class="text-end">
+                                                    <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
+                                                    <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: -10px;">
+                <footer>
+                    <p style="margin: auto; text-align: center;">© Bản quyền thuộc về nhóm PQP</p>
+                    <p style="margin: auto; text-align: center;"><i>20146396@student.hcmute.edu.vn</i></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/datatables/datatables.min.js"></script>
+    <script src="assets/js/initiate-datatables.js"></script>
+    <script src="assets/js/script.js"></script>
+
+    <script>
+    var label=[];
+    var data1=[];
+    const chartdata = {
+
+    labels:label,
+    datasets:[{
+        label: 'Đồ thị khoảng cách theo thời gian x=f(t)',
+        backgroundColor: "rgba(48, 164, 255, 0.2)",
+        borderColor: "rgba(48, 164, 255, 0.8)",
+        borderWidth: 2,
+        data:data1
+    }]
+    };
+    const config = {
+        type: 'line',
+        data: chartdata,
+        option:{
+            Animation:false
+        }
+
+
+    };
+    var myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+    // load data tu data base
+    $(document).ready(function(){
+        updateChart();
+    });
+    setInterval(updateChart,500);
+    function updateChart(){
+        // laydata    
+        $.post("readdata.php", function(data){
+            var label=[];
+            var data1=[];
+            for(var i in data){
+                label.push(data[i].stt);
+                data1.push(data[i].khoangcach);
+            }
+            myChart.data.labels = label;
+            myChart.data.datasets.forEach((dataset) => {
+                dataset.data = data1;
+            });
+            myChart.update();
+
+        });
+        }
+        
+    </script>
+    
+    
+    <script>
+        $(document).ready(function(){
+            $(document).on('submit','#pqp_form', function(){
+                $.post('addData.php',$('#pqp_form').serialize(), function(){
+                    alert("Tần suất lấy mẫu đã được thay đổi.")
+                });
+                return false;
+            });
+            updatepqp();
+        });
+        setInterval(updatepqp,500); // repeat ham updateRGB moi 0.5s
+
+        function updatepqp(){
+            // gui http request xuong server
+            $.post("readdata.php", 
+            function(data){
+                var khoangcach1 = data[16].khoangcach;
+                var thoigian1 = data[16].thoigian;
+                var khoangcach2 = data[17].khoangcach;
+                var thoigian2 = data[17].thoigian;
+                var khoangcach3 = data[18].khoangcach;
+                var thoigian3 = data[18].thoigian;
+                var khoangcach4 = data[19].khoangcach;
+                var thoigian4 = data[19].thoigian;
+                var chuoithoigian4 = thoigian4.split(":");
+                var chuoithoigian3 = thoigian3.split(":");
+                var tf = chuoithoigian4[2];
+                var ti = chuoithoigian3[2];
+                var daoham =0;
+                if (tf<=ti)
+                {
+                    tf=tf+60;
+                    daoham = (khoangcach4-khoangcach3)/(tf-ti);
+                }
+                else
+                {
+                    daoham = (khoangcach4-khoangcach3)/(tf-ti);
+                }
+
+                if(Math.abs(daoham)>10)
+                {
+                    document.getElementById("canhbao").style.backgroundColor = "#ff0000"; 
+                }
+                else
+                {
+                    document.getElementById("canhbao").style.backgroundColor = "#00ff00";
+                }
+
+
+                // gan gia tri cho phan tu
+                document.getElementById("khoangcach1").innerHTML = khoangcach1;
+                document.getElementById("thoigian1").innerHTML = thoigian1;
+                document.getElementById("khoangcach2").innerHTML = khoangcach2;
+                document.getElementById("thoigian2").innerHTML = thoigian2;
+                document.getElementById("khoangcach3").innerHTML = khoangcach3;
+                document.getElementById("thoigian3").innerHTML = thoigian3;
+                document.getElementById("khoangcach4").innerHTML = khoangcach4;
+                document.getElementById("thoigian4").innerHTML = thoigian4;
+                document.getElementById("daoham").innerHTML = "dx/dt = " + daoham;
+            }); 
+        }   
+    </script>
+
+</body>
+
+</html>

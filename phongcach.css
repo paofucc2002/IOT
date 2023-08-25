@@ -1,0 +1,33 @@
+@-webkit-keyframes my {
+    0% { color: #FF0000; } 
+    50% { color: #fff;  } 
+    100% { color: #FF0000;  } 
+}
+@-moz-keyframes my { 
+    0% { color: #FF0000; } 
+    50% { color: #fff;  } 
+    100% { color: #FF0000;  } 
+}
+@-o-keyframes my { 
+    0% { color: #FF0000; } 
+    50% { color: #fff;  } 
+    100% { color: #FF0000;  } 
+}
+@keyframes my { 
+    0% { color: #FF0000; } 
+    50% { color: #fff;  } 
+    100% { color: #FF0000;  } 
+} 
+#nhapnhay1 {
+    -webkit-animation: my 700ms infinite;
+    -moz-animation: my 700ms infinite; 
+    -o-animation: my 700ms infinite; 
+    animation: my 700ms infinite;
+}
+#nhapnhay2 {
+    -webkit-animation: my 700ms infinite;
+    -moz-animation: my 700ms infinite; 
+    -o-animation: my 700ms infinite; 
+    animation: my 700ms infinite;
+}
+
